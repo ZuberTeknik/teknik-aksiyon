@@ -7,9 +7,9 @@ if (typeof window === 'undefined') {
 } else {
   window.TAP_CONFIG = {
     mode: 'm365',
-    tenantId: '',      // Entra ID > Genel bakış > Kiracı (Tenant) kimliği
-    clientId: '',      // Uygulama kaydı > Uygulama (istemci) kimliği
+    tenantId: 'b9038edd-e64d-4dd8-9aba-da87e2cb523e',
+    clientId: 'e65d3275-8e59-4e94-aa43-701624441bfd',
     siteUrl: 'https://alterna7.sharepoint.com/sites/ZuberShareFolder', // verilerin tutulacağı SharePoint sitesi
-    redirectUri: ''    // boş bırakılırsa panelin kendi adresi kullanılır (uygulama kaydına aynen eklenmeli)
+    redirectUri: 'https://zuberteknik.github.io/teknik-aksiyon/'
   };
 }
