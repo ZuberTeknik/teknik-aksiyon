@@ -1,4 +1,4 @@
-<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>ZÜBER Teknik Aksiyon Paneli</title><meta name="robots" content="noindex"></head><body>
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>ZÜBER Teknik Aksiyon Paneli</title><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://login.microsoftonline.com https://graph.microsoft.com; frame-src https://login.microsoftonline.com; base-uri 'none'; form-action 'self' https://login.microsoftonline.com"></head><body>
 <meta name="theme-color" content="#15181D">
 <style>/* ZÜBER Teknik Aksiyon Paneli V2 — tasarım belirteçleri
    Kurumsal renkler tek yerden değiştirilebilir (--brand*). */
@@ -350,6 +350,73 @@ table.t { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 
 .login-mode .app { grid-template-columns: 1fr; }
 .login-mode .side, .login-mode .bnav, .login-mode .top { display: none; }
 .user-chip { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ---- V2.1: dashboard özetleri, halka grafik, trend ---- */
+.kpis.k8 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.dash-sum, .dash-ch { margin-bottom: 16px; }
+.dash-sum .card-h { flex-wrap: wrap; }
+.dsum .t td, .dsum .t th { padding-top: 9px; padding-bottom: 9px; }
+.dsum .t .konu { min-width: 180px; }
+.dsum-m { display: none; }
+@media (max-width: 1400px) { .dash-sum { grid-template-columns: 1fr !important; } }
+@media (max-width: 900px) {
+  .kpis.k8 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dsum { display: none; } .dsum-m { display: flex; }
+  .dash-ch { grid-template-columns: 1fr !important; }
+}
+.donut-wrap { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: center; }
+.donut { width: 168px; height: 168px; flex: none; }
+.donut circle[data-kpi]:hover { opacity: .85; }
+.donut .dn-v { font-size: 22px; font-weight: 700; fill: var(--ink); }
+.donut .dn-l { font-size: 10px; fill: var(--muted); }
+.donut-leg { display: flex; flex-direction: column; gap: 6px; min-width: 180px; }
+.donut-leg button { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 9px 12px; cursor: pointer; font: inherit; color: var(--ink); text-align: left; min-height: 44px; }
+.donut-leg button:hover { border-color: var(--line-strong); background: var(--surface-2); }
+.donut-leg i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.donut-leg span { flex: 1; font-size: 13px; color: var(--ink-2); }
+.chart svg .ax { font-size: 10px; fill: var(--muted); }
+.chart svg .wk:hover rect:first-child { fill: var(--surface-2); }
+
+/* ---- V2.1: yeni aksiyon formu ---- */
+.grp { grid-column: span 12; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px 16px; background: var(--surface); }
+.grp > h3 { grid-column: span 12; margin: 0; font-size: 13px; letter-spacing: .3px; color: var(--ink-2); display: flex; gap: 10px; align-items: center; }
+.grp > h3 .n { width: 22px; height: 22px; border-radius: 6px; background: var(--brand); color: var(--brand-ink); display: inline-grid; place-items: center; font-size: 12px; }
+.grp.sys { background: var(--surface-2); }
+.quick { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+.quick button { border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-2); border-radius: 99px; padding: 6px 12px; min-height: 36px; font: inherit; font-size: 13px; cursor: pointer; }
+.quick button.on { background: var(--brand-soft); border-color: var(--brand); color: var(--ink); }
+.f .ferr { color: var(--bad); font-size: 12px; font-weight: 600; }
+.f.has-err textarea, .f.has-err .inp { border-color: var(--bad); }
+.f.has-err .combo-input { border-color: var(--bad); }
+.req-note { font-size: 12px; color: var(--muted); }
+.req-note b { color: var(--bad); }
+.success { text-align: center; padding: 34px 20px; }
+.success .ok-ic { width: 56px; height: 56px; border-radius: 50%; background: var(--ok-bg); color: var(--ok); display: inline-grid; place-items: center; margin-bottom: 10px; }
+.success .ok-ic svg { width: 28px; height: 28px; }
+.success h2 { margin: 4px 0 6px; font-size: 20px; }
+.success .acts { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+.success .acts .btn { min-height: 48px; }
+@media (max-width: 900px) { .grp { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr); padding: 12px; gap: 12px; } .grp > .f, .grp > h3, .req-note { grid-column: 1 / -1 !important; } .success .acts .btn { flex: 1 1 100%; } }
+
+/* ---- V2.1: sayfalama, silme, özet ---- */
+.pager { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.pager .btn { min-width: 40px; }
+.pager .btn.on { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.pager select { min-height: 36px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); color: var(--ink); padding: 0 8px; }
+.dsummary { border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 14px; background: var(--surface-2); }
+.dsummary.done { border-color: color-mix(in srgb, var(--ok) 35%, var(--line)); background: color-mix(in srgb, var(--ok-bg) 45%, var(--surface)); }
+.dsummary h4 { margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); }
+.dsummary p { margin: 0 0 10px; white-space: pre-wrap; }
+.dsummary .row { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
+.btn.danger-ghost { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 30%, var(--line-strong)); }
+.deleted-note { background: var(--bad-bg); color: var(--bad); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; font-size: 13px; }
+.drange { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.drange input { max-width: 150px; }
+@media (max-width: 900px) { .drange { display: none; width: 100%; } .toolbar.show-f .drange { display: flex; } .drange input { max-width: none; flex: 1; } }
+/* Mobilde sistem alanları varsayılan kapalı (sahada daha az kaydırma) */
+@media (max-width: 900px) { .grp.fold:not(.open) > .f { display: none; } .grp.fold > h3 { cursor: pointer; min-height: 32px; } }
+@media (min-width: 901px) { .grp.fold > h3 .help { display: none; } }
+.qexp { display: flex; gap: 10px; flex-wrap: wrap; } @media (max-width: 900px) { .qexp .btn { flex: 1 1 100%; justify-content: flex-start; min-height: 48px; } }
 </style>
 <div class="app">
   <aside class="side" aria-label="Ana menü">
@@ -482,7 +549,7 @@ window.TAP = window.TAP || {};
     { key: 'aksiyonId', label: 'Aksiyon ID', type: 'id' },
   ];
   // Panelde olup Excel'de karşılığı olmayan ek alan
-  const EXTRA_FIELDS = [{ key: 'oncelik', label: 'Öncelik', type: 'enum' }];
+  const EXTRA_FIELDS = [{ key: 'oncelik', label: 'Öncelik', type: 'enum' }, { key: 'kapanisAciklamasi', label: 'Kapanış açıklaması', type: 'text' }];
 
   const DURUMLAR = ['Açık', 'Devam Ediyor', 'Beklemede', 'Tamamlandı'];
   const ONAYLAR = ['', 'Onay Bekliyor', 'Onaylandı', 'Reddedildi'];
@@ -529,7 +596,7 @@ window.TAP = window.TAP || {};
     if (a.surum > x.sonBasariliSurum) return 'changed';
     return 'synced';
   }
-  const EXCEL_STATE_LABEL = { new: 'Aktarılmadı', changed: 'Aktarımdan sonra değişti', pending: 'Doğrulama bekliyor', synced: 'Aktarıldı (doğrulandı)' };
+  const EXCEL_STATE_LABEL = { new: 'Senkronizasyon bekliyor (yeni)', changed: 'Senkronizasyon bekliyor (değişti)', pending: 'Doğrulama bekliyor', synced: 'Excel\'de (doğrulandı)' };
 
   // Kayıt -> Excel satırı (15 sütun, Excel adlarıyla)
   function toExcelRow(a, resolveName) {
@@ -564,6 +631,21 @@ window.TAP = window.TAP || {};
     return [...m.values()].filter(g => g.length > 1);
   }
 
+  // Hafta: Pazartesi başlangıçlı (TR). weekStart('2026-10-23') -> '2026-10-19'
+  function weekStart(str) { const [y, mo, d] = str.split('-').map(Number); const dt = new Date(y, mo - 1, d); const wd = (dt.getDay() + 6) % 7; return todayStr(new Date(y, mo - 1, d - wd)); }
+  function inWeek(str, today) { if (!str) return false; const ws = weekStart(today || todayStr()); return str >= ws && str <= addDays(ws, 6); }
+  // Kapanış süresi (gün): talep -> tamamlanma. Bilinmiyorsa null.
+  function closeDays(a) { return (isDone(a) && a.talepTarihi && a.tamamlanmaTarihi) ? daysBetween(a.talepTarihi, a.tamamlanmaTarihi) : null; }
+  // Yeni aksiyonda zorunlu alanlar (sahadaki akış: tesis, hat, sorun, aksiyon, sorumlu)
+  const REQUIRED_NEW = ['firma', 'hat', 'konu', 'alinacakAksiyon'];
+  function validateNew(o) {
+    const err = {};
+    for (const k of REQUIRED_NEW) if (!o[k] || !String(o[k]).trim()) err[k] = 'Zorunlu alan';
+    if (!(o.sorumluDepartman && o.sorumluDepartman.trim()) && !(o.sorumluPersonel && o.sorumluPersonel.trim())) err.sorumluDepartman = 'Sorumlu departman veya personel seçin';
+    if (o.terminTarihi && o.talepTarihi && o.terminTarihi < o.talepTarihi) err.terminTarihi = 'Termin, talep tarihinden önce olamaz';
+    return err;
+  }
+
   function formatId(prefix, n) { return prefix + String(n).padStart(4, '0'); }
   function parseIdNum(id, prefix) {
     if (!id || !id.startsWith(prefix)) return null;
@@ -575,6 +657,7 @@ window.TAP = window.TAP || {};
     todayStr, addDays, daysBetween, fmtDate, fmtDateTime,
     isDone, isOverdue, isUpcoming, terminState, excelState, EXCEL_STATE_LABEL,
     toExcelRow, diffRows, normKey, similarGroups, formatId, parseIdNum,
+    weekStart, inWeek, closeDays, REQUIRED_NEW, validateNew,
   };
 })(window.TAP);
 
@@ -754,7 +837,10 @@ window.TAP = window.TAP || {};
     return repo;
   };
 
-  repo.allActions = () => [...repo.actions.values()];
+  // Silinen kayıtlar (yumuşak silme) listelerde, dashboard'da ve Excel aktarımında görünmez;
+  // numaralandırmada sayılmaya devam eder, böylece aynı Aksiyon ID tekrar verilmez.
+  repo.allActions = () => [...repo.actions.values()].filter(a => !a.silindi);
+  repo.deletedActions = () => [...repo.actions.values()].filter(a => a.silindi);
 
   // ----- kimlik / isim çözümleme -----
   repo.resolveNames = async function (ids) {
@@ -789,7 +875,7 @@ window.TAP = window.TAP || {};
   };
 
   // ----- oluşturma -----
-  const EDITABLE = ['isNo', 'firma', 'hat', 'konu', 'alinacakAksiyon', 'aksiyonAcan', 'talepTarihi', 'talepEden', 'sorumluDepartman', 'sorumluPersonel', 'onay', 'terminTarihi', 'tamamlanmaTarihi', 'durum', 'oncelik'];
+  const EDITABLE = ['isNo', 'firma', 'hat', 'konu', 'alinacakAksiyon', 'aksiyonAcan', 'talepTarihi', 'talepEden', 'sorumluDepartman', 'sorumluPersonel', 'onay', 'terminTarihi', 'tamamlanmaTarihi', 'durum', 'oncelik', 'kapanisAciklamasi'];
 
   function buildAction(form, id, isNo) {
     const m = M(), now = new Date().toISOString();
@@ -897,7 +983,33 @@ window.TAP = window.TAP || {};
     return next;
   };
 
-  repo.completeAction = (id, baseSurum) => repo.updateAction(id, { durum: 'Tamamlandı' }, baseSurum);
+  repo.completeAction = (id, baseSurum, not) => repo.updateAction(id, Object.assign({ durum: 'Tamamlandı' }, not ? { kapanisAciklamasi: not } : {}), baseSurum);
+
+  // ----- silme (yumuşak) ve geri alma -----
+  async function setDeleted(id, flag, baseSurum, neden) {
+    const cur = await repo.driver.get('actions', id);
+    if (!cur) throw new Error('Kayıt bulunamadı: ' + id);
+    if (baseSurum != null && cur.surum !== baseSurum) throw ConflictError(cur);
+    if (!!cur.silindi === flag) return cur;
+    const next = clone(cur), now = new Date().toISOString();
+    if (flag) { next.silindi = true; next.silinmeZamani = now; next.silenId = repo.me ? repo.me.id : null; next.silenAd = repo.me && repo.driver.storeNames ? (repo.me.name || '') : ''; next.silmeNedeni = neden || ''; }
+    else { delete next.silindi; delete next.silinmeZamani; delete next.silenId; delete next.silenAd; delete next.silmeNedeni; }
+    next.surum = (cur.surum || 1) + 1; next.sonGuncelleme = now; next.guncelleyenId = repo.me ? repo.me.id : null;
+    await repo.driver.set('actions', id, next);
+    await addHistory(id, flag ? 'silme' : 'geri_alma', next.surum, [], neden ? { neden } : null);
+    repo.actions.set(id, next); repo.emit('actions');
+    return next;
+  }
+  repo.deleteAction = (id, baseSurum, neden) => setDeleted(id, true, baseSurum, neden);
+  repo.restoreAction = (id) => setDeleted(id, false, null);
+
+  // ----- yinelenen kayıt koruması -----
+  // Aynı konu + firma + hat ile son 10 dakikada açılmış, silinmemiş kayıt varsa döndürür.
+  repo.findRecentDuplicate = function (o, minutes) {
+    const norm = (x) => String(x || '').toLocaleLowerCase('tr').replace(/\s+/g, ' ').trim();
+    const lim = Date.now() - (minutes || 10) * 60000;
+    return repo.allActions().find(a => norm(a.konu) === norm(o.konu) && norm(a.firma) === norm(o.firma) && norm(a.hat) === norm(o.hat) && a.olusturmaTarihi && Date.parse(a.olusturmaTarihi) >= lim) || null;
+  };
 
   // Excel meta verisi — kayıt sürümünü ARTIRMAZ
   async function setExcelMeta(id, patch) {
@@ -1687,9 +1799,9 @@ window.TAP = window.TAP || {};
   const ui = {
     route: 'dashboard', writable: true, admin: true,
     lists: {
-      liste: { q: '', f: {}, sort: { k: 'aksiyonId', d: 'desc' }, limit: 100 },
-      acik: { q: '', f: {}, sort: { k: 'terminTarihi', d: 'asc' }, limit: 100 },
-      tamamlanan: { q: '', f: {}, sort: { k: 'tamamlanmaTarihi', d: 'desc' }, limit: 100 },
+      liste: { q: '', f: {}, sort: { k: 'aksiyonId', d: 'desc' }, page: 1, size: 25 },
+      acik: { q: '', f: {}, sort: { k: 'terminTarihi', d: 'asc' }, page: 1, size: 25 },
+      tamamlanan: { q: '', f: {}, sort: { k: 'tamamlanmaTarihi', d: 'desc' }, page: 1, size: 25 },
     },
     excel: { tab: 'bekleyen', filter: 'all', sel: new Set(), open: new Set() },
     rapor: { from: '', to: '', group: 'sorumluDepartman' },
@@ -1773,7 +1885,7 @@ window.TAP = window.TAP || {};
   function isTestMode() { return repo.driver.mode === 'local' || repo.driver.mode === 'memory'; }
   function counts() {
     const today = m.todayStr(); let open = 0, overdue = 0, pend = 0;
-    for (const a of repo.actions.values()) { if (!m.isDone(a)) open++; if (m.isOverdue(a, today)) overdue++; const x = m.excelState(a); if (x === 'new' || x === 'changed') pend++; }
+    for (const a of repo.allActions()) { if (!m.isDone(a)) open++; if (m.isOverdue(a, today)) overdue++; const x = m.excelState(a); if (x === 'new' || x === 'changed') pend++; }
     return { open, overdue, pend };
   }
   function navHTML() {
@@ -1821,40 +1933,109 @@ window.TAP = window.TAP || {};
     return '<div class="bars">' + arr.map(r => '<div class="bar-row"' + (filterKey && !r.k.startsWith('Diğer') && r.k !== '(Belirtilmemiş)' ? ' style="cursor:pointer" data-gofilter="' + filterKey + '" data-val="' + esc(r.k) + '"' : '') + '><span class="nm" title="' + esc(r.k) + '">' + esc(r.k) + '</span><span class="nums">' + r.t + ' · ' + r.o + ' açık' + (r.x ? ' · <b style="color:var(--bad)">' + r.x + ' gecikmiş</b>' : '') + '</span>' +
       '<div class="bar-track" style="width:' + Math.max(4, r.t / max * 100) + '%"><i class="x" style="width:' + (r.x / r.t * 100) + '%"></i><i class="o" style="width:' + ((r.o - r.x) / r.t * 100) + '%"></i><i class="d" style="width:' + (r.d / r.t * 100) + '%"></i></div></div>').join('') + '</div>';
   }
-  function miniList(arr, today, empty) {
-    if (!arr.length) return '<div class="empty" style="padding:18px">' + empty + '</div>';
-    return '<div class="tbl-wrap" style="box-shadow:none"><table class="t"><tbody>' + arr.slice(0, 8).map(a => '<tr data-open="' + esc(a.aksiyonId) + '"><td class="id">' + esc(a.aksiyonId) + '</td><td class="konu">' + esc(a.konu) + '<small>' + esc([a.sorumluDepartman, a.sorumluPersonel].filter(Boolean).join(' · ')) + '</small></td><td class="nw">' + esc(m.fmtDate(a.terminTarihi)) + '<br>' + terminB(a, today) + '</td></tr>').join('') + '</tbody></table></div>';
+  const sorumluTxt = (a) => [a.sorumluPersonel, a.sorumluDepartman].filter(Boolean).join(' · ') || '—';
+  function gecikmeB(a, today) {
+    if (!a.terminTarihi) return '<span class="b none">Termin yok</span>';
+    const d = m.daysBetween(a.terminTarihi, today);
+    if (d > 0) return '<span class="b overdue">' + d + ' gün gecikti</span>';
+    if (d === 0) return '<span class="b upcoming">Bugün</span>';
+    if (-d <= m.UPCOMING_DAYS) return '<span class="b upcoming">' + (-d) + ' gün kaldı</span>';
+    return '<span class="b done">Zamanında</span>';
+  }
+  const kapanisTxt = (a) => { const d = m.closeDays(a); return d == null ? '—' : (d === 0 ? 'Aynı gün' : d + ' gün'); };
+  function openSummary(arr, today) {
+    if (!arr.length) return '<div class="empty" style="padding:18px">Açık aksiyon yok</div>';
+    const rows = arr.slice(0, 8);
+    return '<div class="tbl-wrap dsum" style="box-shadow:none"><table class="t"><thead><tr><th>Aksiyon</th><th>Firma / Hat</th><th>Konu</th><th>Sorumlu</th><th>Açılış</th><th>Termin</th><th>Gecikme</th></tr></thead><tbody>' +
+      rows.map(a => '<tr data-open="' + esc(a.aksiyonId) + '"><td class="id">' + esc(a.aksiyonId) + '</td><td class="nw">' + esc(a.firma || '—') + '<div class="muted">' + esc(a.hat || '') + '</div></td><td class="konu">' + esc(a.konu) + '</td><td>' + esc(sorumluTxt(a)) + '</td><td class="nw muted">' + esc(m.fmtDate(a.talepTarihi) || '—') + '</td><td class="nw">' + esc(m.fmtDate(a.terminTarihi) || '—') + '</td><td class="nw">' + gecikmeB(a, today) + '</td></tr>').join('') + '</tbody></table></div>' +
+      '<div class="mlist dsum-m">' + rows.map(a => '<div class="mcard' + (m.isOverdue(a, today) ? ' overdue' : '') + '" data-open="' + esc(a.aksiyonId) + '"><div class="r1"><span class="id">' + esc(a.aksiyonId) + '</span><span style="margin-left:auto">' + esc([a.firma, a.hat].filter(Boolean).join(' · ')) + '</span></div><h3>' + esc(a.konu) + '</h3><div class="meta"><span>' + esc(sorumluTxt(a)) + '</span><span>Açılış ' + esc(m.fmtDate(a.talepTarihi) || '—') + '</span>' + (a.terminTarihi ? '<span>Termin ' + esc(m.fmtDate(a.terminTarihi)) + '</span>' : '') + '</div><div class="r3">' + gecikmeB(a, today) + '</div></div>').join('') + '</div>';
+  }
+  function doneSummary(arr) {
+    if (!arr.length) return '<div class="empty" style="padding:18px">Tamamlanan aksiyon yok</div>';
+    const rows = arr.slice(0, 8);
+    return '<div class="tbl-wrap dsum" style="box-shadow:none"><table class="t"><thead><tr><th>Aksiyon</th><th>Konu</th><th>Sorumlu</th><th>Açılış</th><th>Tamamlanma</th><th>Kapanış süresi</th></tr></thead><tbody>' +
+      rows.map(a => '<tr data-open="' + esc(a.aksiyonId) + '" title="Yapılan işi ve kayıt detayını gör"><td class="id">' + esc(a.aksiyonId) + '</td><td class="konu">' + esc(a.konu) + (a.alinacakAksiyon ? '<small>→ ' + esc(a.alinacakAksiyon) + '</small>' : '') + '</td><td>' + esc(sorumluTxt(a)) + '</td><td class="nw muted">' + esc(m.fmtDate(a.talepTarihi) || '—') + '</td><td class="nw">' + esc(m.fmtDate(a.tamamlanmaTarihi) || '—') + '</td><td class="nw">' + kapanisTxt(a) + '</td></tr>').join('') + '</tbody></table></div>' +
+      '<div class="mlist dsum-m">' + rows.map(a => '<div class="mcard" data-open="' + esc(a.aksiyonId) + '"><div class="r1"><span class="id">' + esc(a.aksiyonId) + '</span><span style="margin-left:auto">' + esc(sorumluTxt(a)) + '</span></div><h3>' + esc(a.konu) + '</h3>' + (a.alinacakAksiyon ? '<div class="meta">→ ' + esc(a.alinacakAksiyon) + '</div>' : '') + '<div class="meta"><span>Açılış ' + esc(m.fmtDate(a.talepTarihi) || '—') + '</span><span>Tamamlanma ' + esc(m.fmtDate(a.tamamlanmaTarihi) || '—') + '</span><span>Süre ' + kapanisTxt(a) + '</span></div></div>').join('') + '</div>';
+  }
+  // Açık / tamamlanan halka grafiği (SVG). Dilimler tıklanınca ilgili listeye gider.
+  function donutHTML(open, overdue, done) {
+    const total = open + done; if (!total) return '<div class="empty" style="padding:20px">Kayıt yok</div>';
+    const parts = [['Gecikmiş', overdue, 'var(--bad)', 'acik', { termin: 'overdue' }], ['Açık (gecikmesiz)', open - overdue, 'var(--info)', 'acik', {}], ['Tamamlanan', done, 'var(--ok)', 'tamamlanan', {}]];
+    const R = 54, C = 2 * Math.PI * R; let off = 0, s = '<svg viewBox="0 0 140 140" class="donut" role="img" aria-label="Açık ve tamamlanan aksiyon dağılımı">';
+    s += '<circle cx="70" cy="70" r="' + R + '" fill="none" stroke="var(--neutral-bg)" stroke-width="20"/>';
+    for (const [lbl, v, c, route, f] of parts) {
+      if (!v) continue; const len = C * v / total;
+      s += '<circle cx="70" cy="70" r="' + R + '" fill="none" stroke="' + c + '" stroke-width="20" stroke-dasharray="' + len.toFixed(2) + ' ' + (C - len).toFixed(2) + '" stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90 70 70)" data-kpi="' + route + '" data-f="' + esc(JSON.stringify(f)) + '" style="cursor:pointer"><title>' + lbl + ': ' + v + ' (%' + Math.round(v / total * 100) + ')</title></circle>';
+      off += len;
+    }
+    s += '<text x="70" y="66" text-anchor="middle" class="dn-v">%' + Math.round(done / total * 100) + '</text><text x="70" y="84" text-anchor="middle" class="dn-l">tamamlandı</text></svg>';
+    return '<div class="donut-wrap">' + s + '<div class="donut-leg">' + parts.map(([lbl, v, c, route, f]) => '<button type="button" data-kpi="' + route + '" data-f="' + esc(JSON.stringify(f)) + '"><i style="background:' + c + '"></i><span>' + lbl + '</span><b>' + v + '</b></button>').join('') + '</div></div>';
+  }
+  // Haftalık açılış / kapanış trendi (son 12 hafta). Açılış = Talep Tarihi, kapanış = Tamamlanma Tarihi.
+  function weeklyTrend(arr, today) {
+    const weeks = []; let ws = m.weekStart(today);
+    for (let i = 11; i >= 0; i--) weeks.push(m.addDays(ws, -7 * i));
+    const idx = (d) => { if (!d) return -1; const w = m.weekStart(d); return weeks.indexOf(w); };
+    const op = weeks.map(() => 0), cl = weeks.map(() => 0);
+    for (const a of arr) { const i = idx(a.talepTarihi); if (i >= 0) op[i]++; if (m.isDone(a)) { const j = idx(a.tamamlanmaTarihi); if (j >= 0) cl[j]++; } }
+    const max = Math.max(1, ...op, ...cl), W = 640, H = 190, padL = 28, top = 14, gw = (W - padL - 6) / weeks.length, bw = Math.min(16, gw / 2 - 3);
+    let s = '<svg viewBox="0 0 ' + W + ' ' + (H + 26) + '" role="img" aria-label="Son 12 haftada açılan ve kapanan aksiyonlar">';
+    for (let i = 0; i <= 4; i++) { const y = top + (H - top) * i / 4; s += '<line x1="' + padL + '" x2="' + (W - 6) + '" y1="' + y + '" y2="' + y + '" stroke="var(--line)"/><text x="' + (padL - 6) + '" y="' + (y + 4) + '" text-anchor="end" class="ax">' + Math.round(max * (4 - i) / 4) + '</text>'; }
+    weeks.forEach((w, i) => {
+      const x = padL + gw * i + gw / 2, h1 = (H - top) * op[i] / max, h2 = (H - top) * cl[i] / max, lab = m.fmtDate(w).slice(0, 5);
+      s += '<g class="wk"><rect x="' + (x - gw / 2) + '" y="' + top + '" width="' + gw + '" height="' + (H - top) + '" fill="transparent"/>' +
+        '<rect x="' + (x - bw - 1) + '" y="' + (H - h1) + '" width="' + bw + '" height="' + h1 + '" rx="3" fill="var(--info)"/>' +
+        '<rect x="' + (x + 1) + '" y="' + (H - h2) + '" width="' + bw + '" height="' + h2 + '" rx="3" fill="var(--ok)"/>' +
+        '<title>' + lab + ' haftası: ' + op[i] + ' açılan, ' + cl[i] + ' kapanan</title></g>';
+      if (i % 2 === 1 || weeks.length <= 8) s += '<text x="' + x + '" y="' + (H + 18) + '" text-anchor="middle" class="ax">' + lab + '</text>';
+    });
+    return s + '</svg>';
   }
   function renderDashboard(el) {
     const today = m.todayStr(), all = repo.allActions();
-    const total = all.length, done = all.filter(m.isDone).length, open = total - done;
-    const overdue = all.filter(a => m.isOverdue(a, today)), upcoming = all.filter(a => m.isUpcoming(a, today));
-    const noTermin = all.filter(a => !m.isDone(a) && !a.terminTarihi).length;
-    const crit = all.filter(a => !m.isDone(a) && a.oncelik === 'Kritik').length;
+    const total = all.length, doneArr = all.filter(m.isDone), done = doneArr.length, open = total - done;
+    const openArr = all.filter(a => !m.isDone(a));
+    const overdue = openArr.filter(a => m.isOverdue(a, today)), upcoming = openArr.filter(a => m.isUpcoming(a, today));
+    const noTermin = openArr.filter(a => !a.terminTarihi).length;
+    const weekOpened = all.filter(a => m.inWeek(a.talepTarihi, today)).length;
+    const weekDone = doneArr.filter(a => m.inWeek(a.tamamlanmaTarihi, today)).length;
     const rate = total ? Math.round(done / total * 100) : 0;
     if (!total) {
       el.innerHTML = '<div class="card"><div class="empty"><b>Henüz aksiyon kaydı yok</b>İlk aksiyonu oluşturun' + (isTestMode() ? ' ya da Sistem ve Ayarlar ekranından sentetik test verisi yükleyin' : (repo.driver.mode === 'm365' && ui.admin ? ' ya da Sistem ve Ayarlar ekranından mevcut Excel listesini içe aktarın' : '')) + '.<div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn primary" href="#yeni" data-route="yeni">' + ic('plus') + 'Yeni Aksiyon</a>' + (isTestMode() || (repo.driver.mode === 'm365' && ui.admin) ? '<a class="btn" href="#ayarlar" data-route="ayarlar">' + (isTestMode() ? 'Test verisi' : 'Excel\'den içe aktar') + '</a>' : '') + '</div></div></div>';
       return;
     }
+    // Açık: önce gecikenler (en eski termin), sonra termini olanlar, en son termin yok
+    const openSorted = openArr.slice().sort((a, b) => {
+      const ra = m.isOverdue(a, today) ? 0 : a.terminTarihi ? 1 : 2, rb = m.isOverdue(b, today) ? 0 : b.terminTarihi ? 1 : 2;
+      return ra - rb || String(a.terminTarihi || '').localeCompare(String(b.terminTarihi || '')) || String(b.aksiyonId).localeCompare(String(a.aksiyonId));
+    });
+    const doneSorted = doneArr.slice().sort((a, b) => String(b.tamamlanmaTarihi || '').localeCompare(String(a.tamamlanmaTarihi || '')) || String(b.sonGuncelleme || '').localeCompare(String(a.sonGuncelleme || '')));
+    const noDoneDate = doneArr.filter(a => !a.tamamlanmaTarihi).length;
     el.innerHTML =
-      '<div class="kpis">' +
+      '<div class="kpis k8">' +
       kpi('Toplam aksiyon', total, 'brand', 'Tüm kayıtlar', 'liste', {}) +
-      kpi('Açık aksiyon', open, 'info', crit ? crit + ' kritik' : 'Tamamlanmamış', 'acik', {}) +
+      kpi('Açık aksiyon', open, 'info', noTermin + ' tanesinde termin yok', 'acik', {}) +
       kpi('Tamamlanan', done, 'ok', 'Durum: Tamamlandı', 'tamamlanan', {}) +
-      kpi('Geciken', overdue.length, overdue.length ? 'bad' : '', 'Termini geçmiş açık', 'acik', { termin: 'overdue' }) +
-      kpi('Yaklaşan termin', upcoming.length, upcoming.length ? 'warn' : '', 'Önümüzdeki ' + m.UPCOMING_DAYS + ' gün', 'acik', { termin: 'upcoming' }) +
-      kpi('Tamamlanma oranı', '%' + rate, '', noTermin + ' açık kayıtta termin yok', null) +
+      kpi('Geciken', overdue.length, overdue.length ? 'bad' : '', 'Termini geçmiş açık kayıt', 'acik', { termin: 'overdue' }) +
+      kpi('Termini yaklaşan', upcoming.length, upcoming.length ? 'warn' : '', 'Önümüzdeki ' + m.UPCOMING_DAYS + ' gün', 'acik', { termin: 'upcoming' }) +
+      kpi('Bu hafta açılan', weekOpened, '', 'Talep tarihi bu hafta', 'liste', { hafta: 'acilan' }) +
+      kpi('Bu hafta tamamlanan', weekDone, 'ok', 'Tamamlanma tarihi bu hafta', 'tamamlanan', { hafta: 'tamamlanan' }) +
+      kpi('Tamamlanma oranı', '%' + rate, '', done + ' / ' + total, null) +
       '</div>' +
-      '<div class="cols-2" style="margin-bottom:16px">' +
-      '<div class="card"><div class="card-h"><h2>Geciken aksiyonlar</h2><span class="sub">' + overdue.length + ' kayıt</span></div><div class="card-b">' + miniList(overdue.sort((a, b) => a.terminTarihi.localeCompare(b.terminTarihi)), today, 'Geciken aksiyon yok') + '</div></div>' +
-      '<div class="card"><div class="card-h"><h2>Yaklaşan terminler</h2><span class="sub">' + m.UPCOMING_DAYS + ' gün içinde</span></div><div class="card-b">' + miniList(upcoming.sort((a, b) => a.terminTarihi.localeCompare(b.terminTarihi)), today, 'Yaklaşan termin yok') + '</div></div>' +
+      '<div class="cols-2 dash-sum">' +
+      '<div class="card"><div class="card-h"><h2>Açık aksiyonlar</h2><span class="sub">' + open + ' kayıt · gecikenler üstte</span><a class="btn sm" href="#acik" data-route="acik" style="margin-left:auto">Tümünü gör</a></div><div class="card-b">' + openSummary(openSorted, today) + '</div></div>' +
+      '<div class="card"><div class="card-h"><h2>Tamamlanan aksiyonlar</h2><span class="sub">' + done + ' kayıt · son tamamlananlar</span><a class="btn sm" href="#tamamlanan" data-route="tamamlanan" style="margin-left:auto">Tümünü gör</a></div><div class="card-b">' + doneSummary(doneSorted) + '</div></div>' +
+      '</div>' +
+      '<div class="cols-2 dash-ch" style="grid-template-columns:.8fr 1.2fr">' +
+      '<div class="card"><div class="card-h"><h2>Açık / tamamlanan</h2></div><div class="card-b">' + donutHTML(open, overdue.length, done) + '</div></div>' +
+      '<div class="card"><div class="card-h"><h2>Haftalık açılış ve kapanış</h2><span class="sub">Son 12 hafta</span></div><div class="card-b chart">' + weeklyTrend(all, today) + '<div class="legend"><span style="--c:var(--info)">Açılan (talep tarihi)</span><span style="--c:var(--ok)">Kapanan (tamamlanma tarihi)</span>' + (noDoneDate ? '<span>' + noDoneDate + ' tamamlanan kayıtta tamamlanma tarihi yok; trendde sayılmaz.</span>' : '') + '</div></div></div>' +
       '</div>' +
       '<div class="cols-3">' +
       '<div class="card"><div class="card-h"><h2>Firma bazında</h2></div><div class="card-b">' + barsHTML(distribution(all, 'firma', today, 8), 'firma') + '</div></div>' +
-      '<div class="card"><div class="card-h"><h2>Departman bazında</h2></div><div class="card-b">' + barsHTML(distribution(all, 'sorumluDepartman', today, 8), 'sorumluDepartman') + '</div></div>' +
-      '<div class="card"><div class="card-h"><h2>Sorumlu personel bazında</h2></div><div class="card-b">' + barsHTML(distribution(all, 'sorumluPersonel', today, 8), 'sorumluPersonel') + '</div></div>' +
+      '<div class="card"><div class="card-h"><h2>Hat bazında</h2></div><div class="card-b">' + barsHTML(distribution(all, 'hat', today, 8), 'hat') + '</div></div>' +
+      '<div class="card"><div class="card-h"><h2>Sorumlu departman bazında</h2></div><div class="card-b">' + barsHTML(distribution(all, 'sorumluDepartman', today, 8), 'sorumluDepartman') + '</div></div>' +
       '</div>' +
-      '<div class="legend"><span style="--c:var(--bad)">Gecikmiş</span><span style="--c:var(--info)">Açık</span><span style="--c:color-mix(in srgb, var(--ok) 55%, transparent)">Tamamlanan</span><span>Not: Termin tarihi girilmemiş kayıtlar gecikmiş sayılmaz.</span></div>';
+      '<div class="legend"><span style="--c:var(--bad)">Gecikmiş</span><span style="--c:var(--info)">Açık</span><span style="--c:color-mix(in srgb, var(--ok) 55%, transparent)">Tamamlanan</span><span>Çubuklara tıklayınca liste o değere göre süzülür. Termin tarihi girilmemiş kayıtlar gecikmiş sayılmaz.</span></div>';
   }
   function kpi(lbl, val, cls, hint, route, f) {
     return '<button class="kpi ' + cls + '"' + (route ? ' data-kpi="' + route + '" data-f="' + esc(JSON.stringify(f || {})) + '"' : ' style="cursor:default"') + '><div class="lbl">' + lbl + '</div><div class="val">' + val + '</div><div class="hint">' + esc(hint) + '</div></button>';
@@ -1882,32 +2063,63 @@ window.TAP = window.TAP || {};
     }
     return '<input class="inp" name="aksiyonAcan" placeholder="Adınızı yazın" autocomplete="name"><span class="help">Kullanıcı kimliği belirlenemedi — lütfen elle girin.</span>';
   }
+  // Sık kullanılan değerler: son 90 günde en çok kullanılan 4 değer (yoksa tüm kayıtlar). Hat, seçili firmaya göre süzülür.
+  function topValues(key, where) {
+    const today = m.todayStr(), from = m.addDays(today, -90);
+    const pick = (arr) => { const c = new Map(); for (const a of arr) { const v = a[key]; if (v != null && String(v).trim() !== '') c.set(String(v), (c.get(String(v)) || 0) + 1); } return [...c.entries()].sort((x, y) => y[1] - x[1]).slice(0, 4).map(x => x[0]); };
+    let arr = repo.allActions(); if (where) arr = arr.filter(where);
+    const recent = pick(arr.filter(a => a.talepTarihi && a.talepTarihi >= from));
+    return recent.length >= 2 ? recent : pick(arr);
+  }
+  function quickHTML(key, cur, where) {
+    const vals = topValues(key, where); if (!vals.length) return '<div class="quick" data-quick="' + key + '"></div>';
+    return '<div class="quick" data-quick="' + key + '" aria-label="Sık kullanılanlar">' + vals.map(v => '<button type="button" data-qv="' + esc(v) + '" class="' + (v === cur ? 'on' : '') + '">' + esc(v) + '</button>').join('') + '</div>';
+  }
+  function fld(cls, label, inner, opt) {
+    opt = opt || {};
+    return '<div class="f ' + cls + '" data-fld="' + (opt.key || '') + '"><label' + (opt.for ? ' for="' + opt.for + '"' : '') + '>' + label + (opt.req ? ' <span class="req" aria-hidden="true">*</span>' : '') + (opt.help ? ' <span class="help">' + opt.help + '</span>' : '') + '</label>' + inner + '<span class="ferr" aria-live="polite"></span></div>';
+  }
   function formHTML(a, mode) {
-    a = a || {}; const isNew = mode === 'new'; const p = nextIdPreview();
+    a = a || {}; const isNew = mode === 'new'; const p = nextIdPreview(); const R = isNew; // zorunlu işaretleri yeni kayıtta
     const v = (k, d) => a[k] != null && a[k] !== '' ? a[k] : (d || '');
+    const firmaNow = v('firma');
     return '<form class="form" id="' + (isNew ? 'newForm' : 'editForm') + '" novalidate autocomplete="off">' +
-      '<div class="section-title">Aksiyon</div>' +
-      '<div class="f w12"><label for="f-konu">Konu <span class="req">*</span></label><textarea id="f-konu" name="konu" rows="2" placeholder="Sorunu kısaca tanımlayın" required>' + esc(v('konu')) + '</textarea></div>' +
-      '<div class="f w12"><label for="f-aks">Alınacak Aksiyon</label><textarea id="f-aks" name="alinacakAksiyon" rows="2" placeholder="Yapılacak iş">' + esc(v('alinacakAksiyon')) + '</textarea></div>' +
-      '<div class="f"><label>Firma</label>' + comboHTML('firma', v('firma'), 'firma') + '</div>' +
-      '<div class="f"><label>Hat</label>' + comboHTML('hat', v('hat'), 'hat') + '</div>' +
-      '<div class="f"><label>Öncelik <span class="help">(panel alanı)</span></label>' + segHTML('oncelik', m.ONCELIKLER, v('oncelik', 'Normal')) + '</div>' +
-      '<div class="section-title">Talep ve sorumluluk</div>' +
-      '<div class="f"><label>Talep Eden</label>' + comboHTML('talepEden', v('talepEden'), 'talepEden') + '</div>' +
-      '<div class="f"><label for="f-tt">Talep Tarihi</label><input id="f-tt" class="inp" type="date" name="talepTarihi" value="' + esc(v('talepTarihi', isNew ? m.todayStr() : '')) + '"></div>' +
-      '<div class="f"><label for="f-term">Termin Tarihi</label><input id="f-term" class="inp" type="date" name="terminTarihi" value="' + esc(v('terminTarihi')) + '"></div>' +
-      '<div class="f w6"><label>Sorumlu Departman</label>' + comboHTML('sorumluDepartman', v('sorumluDepartman'), 'sorumluDepartman') + '</div>' +
-      '<div class="f w6"><label>Sorumlu Personel</label>' + comboHTML('sorumluPersonel', v('sorumluPersonel'), 'sorumluPersonel') + '</div>' +
-      '<div class="section-title">Durum</div>' +
-      '<div class="f w6"><label>Durum</label>' + segHTML('durum', m.DURUMLAR, v('durum', 'Açık')) + '</div>' +
-      '<div class="f w3"><label for="f-onay">Onay</label><select id="f-onay" name="onay">' + m.ONAYLAR.map(o => '<option value="' + esc(o) + '"' + (o === (a.onay || '') ? ' selected' : '') + '>' + (o || '—') + '</option>').join('') + '</select></div>' +
-      '<div class="f w3"><label for="f-tam">Tamamlanma Tarihi</label><input id="f-tam" class="inp" type="date" name="tamamlanmaTarihi" value="' + esc(v('tamamlanmaTarihi')) + '"><span class="help">Tamamlandı seçilince otomatik dolar</span></div>' +
-      '<div class="section-title">Kimlik ve numaralandırma</div>' +
-      '<div class="f"><label>Aksiyon Açan</label>' + acanHTML(isNew ? null : a) + '</div>' +
-      '<div class="f"><label for="f-isno">İş No</label><input id="f-isno" class="inp" type="number" inputmode="numeric" name="isNo" value="' + esc(isNew ? '' : v('isNo')) + '" placeholder="' + (isNew ? 'Otomatik: ' + p.isNo : '') + '"></div>' +
-      '<div class="f"><label>Aksiyon ID <span class="help">benzersiz anahtar</span></label><div class="autofield" id="idPreview">' + (isNew ? esc(p.id) + ' <span class="help" style="margin-left:auto">kayıtta kesinleşir</span>' : esc(a.aksiyonId)) + '</div></div>' +
+      (isNew ? '<p class="req-note" style="grid-column:span 12;margin:0"><b>*</b> işaretli alanlar zorunludur. Sorumlu için departman veya personelden en az biri seçilmelidir.</p>' : '') +
+      '<section class="grp"><h3><span class="n">A</span>Aksiyon bilgileri</h3>' +
+      fld('w6', 'Firma', comboHTML('firma', firmaNow, 'firma', 'Tesis ara veya seç…') + (isNew ? quickHTML('firma', firmaNow) : ''), { key: 'firma', req: R }) +
+      fld('w6', 'Hat', comboHTML('hat', v('hat'), 'hat', 'Hat ara veya seç…') + (isNew ? quickHTML('hat', v('hat'), firmaNow ? (x => x.firma === firmaNow) : null) : ''), { key: 'hat', req: R }) +
+      fld('w12', 'Konu', '<textarea id="f-konu" name="konu" rows="2" placeholder="Tespit edilen sorunu kısaca tanımlayın" required>' + esc(v('konu')) + '</textarea>', { key: 'konu', req: true, for: 'f-konu' }) +
+      fld('w12', 'Alınacak Aksiyon', '<textarea id="f-aks" name="alinacakAksiyon" rows="2" placeholder="Yapılması gereken iş">' + esc(v('alinacakAksiyon')) + '</textarea>', { key: 'alinacakAksiyon', req: R, for: 'f-aks' }) +
+      fld('w12', 'Öncelik', segHTML('oncelik', m.ONCELIKLER, v('oncelik', 'Normal')), { help: '(panel alanı, Excel\'e aktarılmaz)' }) +
+      '</section>' +
+      '<section class="grp"><h3><span class="n">B</span>Sorumluluk</h3>' +
+      fld('w6', 'Aksiyon Açan', acanHTML(isNew ? null : a)) +
+      fld('w6', 'Talep Eden', comboHTML('talepEden', v('talepEden'), 'talepEden'), { key: 'talepEden' }) +
+      fld('w6', 'Sorumlu Departman', comboHTML('sorumluDepartman', v('sorumluDepartman'), 'sorumluDepartman') + (isNew ? quickHTML('sorumluDepartman', v('sorumluDepartman')) : ''), { key: 'sorumluDepartman', req: R }) +
+      fld('w6', 'Sorumlu Personel', comboHTML('sorumluPersonel', v('sorumluPersonel'), 'sorumluPersonel'), { key: 'sorumluPersonel' }) +
+      '</section>' +
+      '<section class="grp"><h3><span class="n">C</span>Planlama</h3>' +
+      fld('w3', 'Talep Tarihi', '<input id="f-tt" class="inp" type="date" name="talepTarihi" value="' + esc(v('talepTarihi', isNew ? m.todayStr() : '')) + '">', { key: 'talepTarihi', for: 'f-tt' }) +
+      fld('w3', 'Termin Tarihi', '<input id="f-term" class="inp" type="date" name="terminTarihi" value="' + esc(v('terminTarihi')) + '">', { key: 'terminTarihi', for: 'f-term', help: 'isteğe bağlı' }) +
+      fld('w6', 'Durum', segHTML('durum', m.DURUMLAR, v('durum', 'Açık'))) +
+      (!isNew && (m.isDone(a) || a.kapanisAciklamasi) ? fld('w12', 'Kapanış açıklaması', '<textarea name="kapanisAciklamasi" rows="2" maxlength="500">' + esc(v('kapanisAciklamasi')) + '</textarea>', { help: '(panel alanı)' }) : '') +
+      '</section>' +
+      '<section class="grp sys' + (isNew ? ' fold' : '') + '"><h3' + (isNew ? ' data-grptoggle role="button" tabindex="0" aria-expanded="false"' : '') + '><span class="n">D</span>Sistem alanları' + (isNew ? '<span class="help" style="margin-left:auto">otomatik doldurulur · göster</span>' : '') + '</h3>' +
+      fld('w3', 'Aksiyon ID', '<div class="autofield" id="idPreview">' + (isNew ? esc(p.id) + ' <span class="help" style="margin-left:auto">kayıtta kesinleşir</span>' : esc(a.aksiyonId)) + '</div>', { help: 'benzersiz anahtar' }) +
+      fld('w3', 'İş No', '<input id="f-isno" class="inp" type="number" inputmode="numeric" name="isNo" value="' + esc(isNew ? '' : v('isNo')) + '" placeholder="' + (isNew ? 'Otomatik: ' + p.isNo : '') + '">', { for: 'f-isno' }) +
+      fld('w3', 'Tamamlanma Tarihi', '<input id="f-tam" class="inp" type="date" name="tamamlanmaTarihi" value="' + esc(v('tamamlanmaTarihi')) + '"><span class="help">Tamamlandı seçilince otomatik dolar</span>', { for: 'f-tam' }) +
+      fld('w3', 'Onay', '<select id="f-onay" name="onay">' + m.ONAYLAR.map(o => '<option value="' + esc(o) + '"' + (o === (a.onay || '') ? ' selected' : '') + '>' + (o || '—') + '</option>').join('') + '</select>', { for: 'f-onay' }) +
+      '</section>' +
       (isNew ? '<div class="form-actions sticky"><button type="button" class="btn" data-act="reset">Temizle</button><button type="submit" class="btn" name="andNew" value="1" data-write>Kaydet ve yeni</button><button type="submit" class="btn primary" data-write>' + ic('done') + 'Kaydet</button></div>' : '') +
       '</form>';
+  }
+  function showFormErrors(form, err) {
+    $$('.f.has-err', form).forEach(f => { f.classList.remove('has-err'); const e = $('.ferr', f); if (e) e.textContent = ''; });
+    $$('.combo.err', form).forEach(c => c.classList.remove('err'));
+    const keys = Object.keys(err); if (!keys.length) return true;
+    for (const k of keys) { const f = form.querySelector('[data-fld="' + k + '"]'); if (!f) continue; f.classList.add('has-err'); $('.ferr', f).textContent = err[k]; const c = $('.combo', f); if (c) c.classList.add('err'); }
+    const first = form.querySelector('[data-fld="' + keys[0] + '"]'); if (first) { first.scrollIntoView({ block: 'center', behavior: 'smooth' }); const i = first.querySelector('textarea,input.combo-input,input.inp'); if (i) setTimeout(() => i.focus({ preventScroll: true }), 250); }
+    return false;
   }
   function readForm(form) {
     const fd = new FormData(form), o = {};
@@ -1924,9 +2136,17 @@ window.TAP = window.TAP || {};
       try { await repo.addListValue(k, o[k]); } catch (e) { /* yetki yoksa kayıt yine kaydedilir */ }
     }
   }
-  function renderNew(el) {
-    el.innerHTML = '<div class="card" style="max-width:1080px"><div class="card-h"><h2>Yeni aksiyon</h2><span class="sub">Zorunlu alan yalnızca Konu. Diğer alanlar sonradan da doldurulabilir.</span></div><div class="card-b">' + formHTML(null, 'new') + '</div></div>';
-    setTimeout(() => { const k = $('#f-konu'); if (k && window.innerWidth > 900) k.focus(); }, 30);
+  function renderNew(el, keep) {
+    ui.lastSaved = null;
+    el.innerHTML = '<div class="card" style="max-width:1080px"><div class="card-h"><h2>Yeni aksiyon</h2><span class="sub">Tesis ve hattı seçin, sorunu ve yapılacak işi yazın, sorumluyu belirleyin.</span></div><div class="card-b">' + formHTML(keep || null, 'new') + '</div></div>';
+    setTimeout(() => { const k = $('#f-konu'); if (k && window.innerWidth > 900 && !keep) k.focus(); }, 30);
+  }
+  function renderSaved(el, a, keep) {
+    ui.lastSaved = { a, keep };
+    el.innerHTML = '<div class="card" style="max-width:720px;margin:0 auto"><div class="success" role="status"><div class="ok-ic">' + ic('done') + '</div><h2>' + esc(a.aksiyonId) + ' kaydedildi</h2>' +
+      '<p class="muted" style="margin:0">' + esc(a.konu) + '</p><p class="help" style="margin:8px 0 0">' + esc([a.firma, a.hat, a.sorumluDepartman || a.sorumluPersonel].filter(Boolean).join(' · ')) + ' · İş No ' + esc(a.isNo) + '</p>' +
+      '<p class="help" style="margin:6px 0 0">Kayıt merkezi sisteme yazıldı; diğer kullanıcıların panelinde de görünür.</p>' +
+      '<div class="acts"><button class="btn primary" data-snew>' + ic('plus') + 'Yeni aksiyon oluştur</button><button class="btn" data-snew-same>Aynı firma ve hatta yeni aksiyon</button><button class="btn" data-open="' + esc(a.aksiyonId) + '">Kaydı aç</button><button class="btn ghost" data-slist>Listede göster</button></div></div></div>';
   }
   document.addEventListener('click', e => {
     const b = e.target.closest('.seg button'); if (!b) return;
@@ -1935,26 +2155,49 @@ window.TAP = window.TAP || {};
     if (seg.dataset.seg === 'durum') { const t = seg.closest('form').querySelector('[name="tamamlanmaTarihi"]'); if (b.dataset.v === 'Tamamlandı' && !t.value) t.value = m.todayStr(); if (b.dataset.v !== 'Tamamlandı') t.value = ''; }
     h.dispatchEvent(new Event('change', { bubbles: true }));
   });
+  document.addEventListener('click', e => { const h = e.target.closest('[data-grptoggle]'); if (!h) return; const g = h.closest('.grp'); g.classList.toggle('open'); h.setAttribute('aria-expanded', g.classList.contains('open')); });
+  // hızlı seçim düğmeleri
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.quick [data-qv]'); if (!b) return; e.preventDefault();
+    const q = b.closest('.quick'), f = q.closest('.f'), c = $('.combo', f);
+    pickCombo(c, b.dataset.qv); $$('button', q).forEach(x => x.classList.toggle('on', x === b));
+  });
+  document.addEventListener('change', e => {
+    const t = e.target; if (!t.matches || !t.matches('#newForm .combo-input')) return;
+    const form = t.closest('form'), f = t.closest('.f');
+    if (f && f.classList.contains('has-err') && t.value.trim()) { f.classList.remove('has-err'); $('.ferr', f).textContent = ''; }
+    if (t.name === 'sorumluPersonel' && t.value.trim()) { const d = form.querySelector('[data-fld="sorumluDepartman"]'); if (d) { d.classList.remove('has-err'); $('.ferr', d).textContent = ''; $('.combo', d).classList.remove('err'); } }
+    const q = f && $('.quick', f); if (q) $$('button', q).forEach(x => x.classList.toggle('on', x.dataset.qv === t.value));
+    if (t.name === 'firma') { // hat önerilerini seçili firmaya göre yenile
+      const hf = form.querySelector('[data-fld="hat"]'), old = hf && $('.quick', hf);
+      if (old) { const w = document.createElement('div'); w.innerHTML = quickHTML('hat', form.hat.value, t.value ? (x => x.firma === t.value) : null); old.replaceWith(w.firstChild); }
+    }
+  });
+  document.addEventListener('input', e => { const f = e.target.closest && e.target.closest('#newForm .f.has-err'); if (f && e.target.value && e.target.value.trim()) { f.classList.remove('has-err'); $('.ferr', f).textContent = ''; } });
   document.addEventListener('submit', async e => {
     if (e.target.id !== 'newForm') return; e.preventDefault();
+    if (ui.saving) return; // çift tıklama / çift gönderim koruması
     const form = e.target, andNew = e.submitter && e.submitter.name === 'andNew';
     const o = readForm(form);
-    if (!o.konu) { form.konu.classList.add('err'); form.konu.focus(); toast('Konu alanı zorunludur.', 'bad'); return; }
-    if (!o.aksiyonAcanOtomatik && form.aksiyonAcan && !o.aksiyonAcan) { /* boş bırakılabilir; uyarı */ }
-    $$('button[type=submit]', form).forEach(b => b.disabled = true);
+    if (!showFormErrors(form, m.validateNew(o))) { toast('Eksik bilgi var: işaretli alanları doldurun.', 'bad'); return; }
+    const dup = repo.findRecentDuplicate(o);
+    if (dup && !(await askConfirm('Aynı konu, firma ve hatla ' + dup.aksiyonId + ' birkaç dakika önce kaydedildi. Yine de yeni kayıt açılsın mı?', 'Yine de kaydet', true))) { toast('Kayıt açılmadı. Mevcut kayıt: ' + dup.aksiyonId); return; }
+    ui.saving = true; $$('button[type=submit]', form).forEach(b => b.disabled = true);
     try {
       await addNewListValues(o);
       const a = await repo.createAction(o);
       toast(a.aksiyonId + ' kaydedildi.', 'ok');
-      if (andNew) {
-        const keep = { firma: o.firma, hat: o.hat, talepEden: o.talepEden, sorumluDepartman: o.sorumluDepartman, sorumluPersonel: o.sorumluPersonel, talepTarihi: o.talepTarihi };
-        renderNew($('#content')); const f = $('#newForm');
-        for (const k in keep) { const i = f.querySelector('[name="' + k + '"]'); if (i && keep[k]) { i.value = keep[k]; const c = i.closest('.combo'); if (c) c.classList.add('has'); } }
-        $('#f-konu').focus();
-      } else { go('liste'); setTimeout(() => flashRow(a.aksiyonId), 80); }
+      const keep = { firma: o.firma, hat: o.hat, talepEden: o.talepEden, sorumluDepartman: o.sorumluDepartman, sorumluPersonel: o.sorumluPersonel, talepTarihi: o.talepTarihi };
+      if (andNew) { renderNew($('#content'), keep); $('#f-konu').focus(); }
+      else renderSaved($('#content'), a, keep);
     } catch (err) { toast('Kaydedilemedi: ' + (err.message || err.code || err), 'bad'); console.error(err); $$('button[type=submit]', form).forEach(b => b.disabled = false); }
+    finally { ui.saving = false; }
   });
-  document.addEventListener('click', e => { const r = e.target.closest('[data-act="reset"]'); if (r) renderNew($('#content')); });
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-act="reset"]') || e.target.closest('[data-snew]')) { renderNew($('#content')); return; }
+    if (e.target.closest('[data-snew-same]')) { const k = ui.lastSaved && ui.lastSaved.keep; renderNew($('#content'), k ? { firma: k.firma, hat: k.hat, sorumluDepartman: k.sorumluDepartman, sorumluPersonel: k.sorumluPersonel, talepEden: k.talepEden } : null); return; }
+    if (e.target.closest('[data-slist]')) { const id = ui.lastSaved && ui.lastSaved.a.aksiyonId; ui.lists.liste.f = {}; ui.lists.liste.q = ''; ui.lists.liste.page = 1; go('liste'); if (id) setTimeout(() => flashRow(id), 80); }
+  });
   function flashRow(id) { const r = document.querySelector('[data-open="' + CSS.escape(id) + '"]'); if (r) { r.scrollIntoView({ block: 'center' }); r.style.transition = 'background 1.2s'; $$('td', r).forEach(td => td.style.background = 'var(--brand-soft)'); r.style.background = 'var(--brand-soft)'; setTimeout(() => { $$('td', r).forEach(td => td.style.background = ''); r.style.background = ''; }, 1600); } }
 
   // =====================================================================
@@ -1970,7 +2213,7 @@ window.TAP = window.TAP || {};
     { k: 'sorumluPersonel', label: 'Personel', opts: () => uniq('sorumluPersonel') },
     { k: 'excel', label: 'Excel', opts: () => Object.entries(m.EXCEL_STATE_LABEL) },
   ];
-  function uniq(k) { const s = new Set(); for (const a of repo.actions.values()) if (a[k] != null && a[k] !== '') s.add(String(a[k])); return [...s].sort((a, b) => a.localeCompare(b, 'tr')); }
+  function uniq(k) { const s = new Set(); for (const a of repo.allActions()) if (a[k] != null && a[k] !== '') s.add(String(a[k])); return [...s].sort((a, b) => a.localeCompare(b, 'tr')); }
   const ONC_RANK = { 'Kritik': 0, 'Yüksek': 1, 'Normal': 2, 'Düşük': 3 };
   function filterActions(view) {
     const st = ui.lists[view], today = m.todayStr(), q = trl(st.q.trim());
@@ -1980,6 +2223,9 @@ window.TAP = window.TAP || {};
     for (const [k, v] of Object.entries(st.f)) {
       if (!v) continue;
       if (k === 'termin') arr = arr.filter(a => m.terminState(a, today) === v);
+      else if (k === 'hafta') arr = arr.filter(a => v === 'acilan' ? m.inWeek(a.talepTarihi, today) : (m.isDone(a) && m.inWeek(a.tamamlanmaTarihi, today)));
+      else if (k === 'terminFrom') arr = arr.filter(a => a.terminTarihi && a.terminTarihi >= v);
+      else if (k === 'terminTo') arr = arr.filter(a => a.terminTarihi && a.terminTarihi <= v);
       else if (k === 'excel') arr = arr.filter(a => m.excelState(a) === v);
       else arr = arr.filter(a => String(a[k] ?? '') === v);
     }
@@ -2005,6 +2251,7 @@ window.TAP = window.TAP || {};
         const cur = st.f[f.k] || '';
         return '<select class="fsel' + (cur ? ' on' : '') + '" data-f="' + f.k + '" aria-label="' + f.label + '"><option value="">' + f.label + ': tümü</option>' + f.opts().map(o => { const [v, l] = Array.isArray(o) ? o : [o, o]; return '<option value="' + esc(v) + '"' + (v === cur ? ' selected' : '') + '>' + esc(l) + '</option>'; }).join('') + '</select>';
       }).join('') +
+      (view !== 'tamamlanan' ? '<label class="drange"><span>Termin</span><input type="date" class="fsel' + (st.f.terminFrom ? ' on' : '') + '" data-f="terminFrom" value="' + esc(st.f.terminFrom || '') + '" aria-label="Termin başlangıç"><span>–</span><input type="date" class="fsel' + (st.f.terminTo ? ' on' : '') + '" data-f="terminTo" value="' + esc(st.f.terminTo || '') + '" aria-label="Termin bitiş"></label>' : '') +
       '<button type="button" class="btn ftoggle" data-ftoggle>Filtreler' + (Object.values(st.f).filter(Boolean).length ? ' (' + Object.values(st.f).filter(Boolean).length + ')' : '') + '</button>' +
       '<select class="fsel only-m" data-sort aria-label="Sıralama">' + sortOpts + '</select>' +
       '</div><div id="listRes"></div>';
@@ -2012,9 +2259,11 @@ window.TAP = window.TAP || {};
   }
   function renderListResults(view) {
     const box = $('#listRes'); if (!box) return;
-    const st = ui.lists[view], today = m.todayStr(), arr = filterActions(view), shown = arr.slice(0, st.limit);
+    const st = ui.lists[view], today = m.todayStr(), arr = filterActions(view);
+    const pages = Math.max(1, Math.ceil(arr.length / st.size)); if (st.page > pages) st.page = pages; if (st.page < 1) st.page = 1;
+    const shown = arr.slice((st.page - 1) * st.size, st.page * st.size);
     const active = Object.values(st.f).filter(Boolean).length + (st.q ? 1 : 0);
-    let h = '<div class="resinfo"><span><b>' + arr.length + '</b> kayıt' + (arr.length > shown.length ? ' (' + shown.length + ' gösteriliyor)' : '') + '</span>' + (active ? '<button class="btn sm ghost" data-clearf>Filtreleri temizle</button>' : '') + '<span style="flex:1"></span><button class="btn sm" data-exportlist>' + ic('dl') + 'Görünümü Excel\'e indir</button></div>';
+    let h = '<div class="resinfo"><span><b>' + arr.length + '</b> kayıt' + (pages > 1 ? ' · sayfa ' + st.page + '/' + pages : '') + '</span>' + (st.f.hafta ? '<span class="b open">' + (st.f.hafta === 'acilan' ? 'Bu hafta açılanlar' : 'Bu hafta tamamlananlar') + '</span>' : '') + (active ? '<button class="btn sm ghost" data-clearf>Filtreleri temizle</button>' : '') + '<span style="flex:1"></span><button class="btn sm" data-exportlist>' + ic('dl') + 'Görünümü Excel\'e indir</button></div>';
     if (!arr.length) { box.innerHTML = h + '<div class="card"><div class="empty"><b>Kayıt bulunamadı</b>' + (active ? 'Filtreleri değiştirin.' : 'Henüz kayıt yok.') + '</div></div>'; return; }
     h += '<div class="tbl-wrap resp"><table class="t"><thead><tr>' + COLS.map(([k, l]) => '<th class="s' + (st.sort.k === k ? ' sorted' : '') + '" data-sortk="' + k + '">' + l + '<span class="ar">' + (st.sort.k === k ? (st.sort.d === 'asc' ? '↑' : '↓') : '↕') + '</span></th>').join('') + '<th></th></tr></thead><tbody>' +
       shown.map(a => {
@@ -2036,16 +2285,30 @@ window.TAP = window.TAP || {};
         '<div class="meta"><span>' + esc([a.sorumluDepartman, a.sorumluPersonel].filter(Boolean).join(' · ') || 'Sorumlu atanmadı') + '</span>' + (a.terminTarihi ? '<span>Termin ' + esc(m.fmtDate(a.terminTarihi)) + '</span>' : '') + '</div>' +
         '<div class="r3">' + durumB(a.durum) + terminB(a, today) + oncB(a.oncelik) + (!m.isDone(a) ? '<button class="btn sm ok" data-complete="' + esc(a.aksiyonId) + '" data-write>' + ic('done') + 'Tamamla</button>' : '') + '</div></div>';
     }).join('') + '</div>';
-    if (arr.length > shown.length) h += '<div style="text-align:center;margin-top:14px"><button class="btn" data-more>Daha fazla göster (' + (arr.length - shown.length) + ')</button></div>';
+    h += pagerHTML(st, pages, arr.length);
     box.innerHTML = h; applyWritable();
   }
+  function pagerHTML(st, pages, n) {
+    const sizes = [25, 50, 100];
+    let nums = [];
+    for (let i = 1; i <= pages; i++) if (i === 1 || i === pages || Math.abs(i - st.page) <= 1) nums.push(i);
+    let h = '<nav class="pager" aria-label="Sayfalama">';
+    if (pages > 1) {
+      h += '<button class="btn sm" data-page="' + (st.page - 1) + '"' + (st.page === 1 ? ' disabled' : '') + ' aria-label="Önceki sayfa">‹</button>';
+      let last = 0; for (const i of nums) { if (i - last > 1) h += '<span>…</span>'; h += '<button class="btn sm' + (i === st.page ? ' on' : '') + '" data-page="' + i + '"' + (i === st.page ? ' aria-current="page"' : '') + '>' + i + '</button>'; last = i; }
+      h += '<button class="btn sm" data-page="' + (st.page + 1) + '"' + (st.page === pages ? ' disabled' : '') + ' aria-label="Sonraki sayfa">›</button>';
+    }
+    if (n > sizes[0]) h += '<span style="margin-left:8px">Sayfa başına</span><select data-psize aria-label="Sayfa başına kayıt">' + sizes.map(z => '<option' + (z === st.size ? ' selected' : '') + '>' + z + '</option>').join('') + '</select>';
+    return h + '</nav>';
+  }
   document.addEventListener('input', e => {
-    if (e.target.matches('[data-q]')) { const v = e.target.closest('.toolbar').dataset.view; ui.lists[v].q = e.target.value; ui.lists[v].limit = 100; clearTimeout(ui._qt); ui._qt = setTimeout(() => renderListResults(v), 120); }
+    if (e.target.matches('[data-q]')) { const v = e.target.closest('.toolbar').dataset.view; ui.lists[v].q = e.target.value; ui.lists[v].page = 1; clearTimeout(ui._qt); ui._qt = setTimeout(() => renderListResults(v), 120); }
   });
   document.addEventListener('change', e => {
     const t = e.target, tb = t.closest('.toolbar'); if (!tb || !tb.dataset.view) return; const v = tb.dataset.view;
-    if (t.matches('[data-f]')) { ui.lists[v].f[t.dataset.f] = t.value; t.classList.toggle('on', !!t.value); renderListResults(v); }
-    if (t.matches('[data-sort]')) { const [k, d] = t.value.split(':'); ui.lists[v].sort = { k, d }; renderListResults(v); }
+    if (t.matches('[data-f]')) { ui.lists[v].f[t.dataset.f] = t.value; ui.lists[v].page = 1; t.classList.toggle('on', !!t.value); renderListResults(v); }
+    if (t.matches('[data-sort]')) { const [k, d] = t.value.split(':'); ui.lists[v].sort = { k, d }; ui.lists[v].page = 1; renderListResults(v); }
+    if (t.matches('[data-psize]')) { ui.lists[v].size = Number(t.value) || 25; ui.lists[v].page = 1; renderListResults(v); }
   });
 
   // =====================================================================
@@ -2074,6 +2337,17 @@ window.TAP = window.TAP || {};
       setTimeout(() => { const b = w.querySelector('[data-c="1"]'); b && b.focus(); }, 30);
     });
   }
+  // Silme onayı + isteğe bağlı neden. Vazgeçilirse null döner.
+  function askReason(title, note) {
+    return new Promise(res => {
+      const prev = $('#cmodal'); if (prev) prev.remove();
+      const w = document.createElement('div'); w.id = 'cmodal';
+      w.innerHTML = '<div class="scrim on" style="z-index:110"></div><div class="modal on" role="alertdialog" aria-modal="true" style="z-index:111;width:min(480px,calc(100% - 32px))"><div class="modal-h"><h2 style="font-size:16px">' + esc(title) + '</h2></div><div class="modal-b" style="padding:0 20px"><p class="help" style="margin-top:0">' + esc(note) + '</p><label class="f"><span class="help">Silme nedeni (isteğe bağlı)</span><input class="inp" id="delReason" maxlength="200" placeholder="Örn. yanlışlıkla açıldı, mükerrer kayıt"></label></div><div class="modal-f"><button class="btn" data-c="0">Vazgeç</button><button class="btn dark" data-c="1">Sil</button></div></div>';
+      document.body.appendChild(w);
+      w.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (b || e.target.classList.contains('scrim')) { e.stopPropagation(); const v = $('#delReason', w).value.trim(); w.remove(); res(b && b.dataset.c === '1' ? v : null); } });
+      setTimeout(() => { const i = w.querySelector('#delReason'); i && i.focus(); }, 30);
+    });
+  }
   function confirmDiscard() { return askConfirm('Kaydedilmemiş değişiklikler silinecek. Devam edilsin mi?', 'Değişiklikleri at', true); }
   async function renderDrawer() {
     const d = ui.drawer; if (!d) return; const a = repo.actions.get(d.id); const today = m.todayStr();
@@ -2081,11 +2355,11 @@ window.TAP = window.TAP || {};
     dr.innerHTML = '<div class="drawer-h"><div class="ttl"><span class="id">' + esc(a.aksiyonId) + ' · İş No ' + esc(a.isNo) + ' · sürüm ' + a.surum + '</span><b>' + esc(a.konu) + '</b></div><span style="flex:1"></span>' + durumB(a.durum) + '<button class="btn ghost sm" data-close aria-label="Kapat">' + ic('x') + '</button></div>' +
       '<div class="drawer-tabs">' + [['detay', 'Detay'], ['gecmis', 'Değişiklik geçmişi'], ['excel', 'Excel durumu']].map(([k, l]) => '<button data-dtab="' + k + '" class="' + (d.tab === k ? 'on' : '') + '">' + l + '</button>').join('') + '</div>' +
       '<div class="drawer-b" id="drawerBody"></div>' +
-      '<div class="drawer-f">' + (m.isDone(a) ? '<button class="btn" data-reopen data-write>Yeniden aç</button>' : '<button class="btn ok" data-dcomplete data-write>' + ic('done') + 'Tamamla</button>') + '<span class="sp"></span><span class="help" id="dirtyNote"></span><button class="btn" data-close>Kapat</button><button class="btn primary" data-dsave data-write>Kaydet</button></div>';
+      '<div class="drawer-f">' + (a.silindi ? '<button class="btn" data-restore="' + esc(a.aksiyonId) + '" data-write data-admin>Silmeyi geri al</button>' : '<button class="btn danger-ghost" data-del data-write title="Kaydı sil">' + ic('x') + 'Sil</button>') + (a.silindi ? '' : m.isDone(a) ? '<button class="btn" data-reopen data-write>Tekrar aç</button>' : '<button class="btn ok" data-dcomplete data-write>' + ic('done') + 'Aksiyonu tamamla</button>') + '<span class="sp"></span><span class="help" id="dirtyNote"></span><button class="btn" data-close>Kapat</button><button class="btn primary" data-dsave data-write>Kaydet</button></div>';
     const body = $('#drawerBody');
     if (d.tab === 'detay') {
       const ia = a.iceAktarma;
-      body.innerHTML = (ia && ia.uyarilar && ia.uyarilar.length ? '<div class="warnbox" style="margin:0 0 14px"><b>Excel\'den aktarımda düzeltme gereken alan:</b> ' + ia.uyarilar.map(u => esc(u.alan) + ' — Excel\'deki değer "' + esc(u.ham) + '" geçerli bir tarih değil, boş bırakıldı').join('; ') + '</div>' : '') + '<div class="meta-grid"><div><span>Oluşturulma</span>' + esc(m.fmtDateTime(a.olusturmaTarihi)) + '</div><div><span>Son güncelleme</span>' + esc(m.fmtDateTime(a.sonGuncelleme)) + '</div><div><span>Termin</span>' + (esc(m.fmtDate(a.terminTarihi)) || '—') + ' ' + terminB(a, today) + '</div></div>' + formHTML(a, 'edit');
+      body.innerHTML = (a.silindi ? '<div class="deleted-note"><b>Bu kayıt silindi</b> · ' + esc(m.fmtDateTime(a.silinmeZamani)) + (a.silmeNedeni ? ' · Neden: ' + esc(a.silmeNedeni) : '') + '. Listelerde ve raporlarda görünmez.</div>' : '') + summaryHTML(a, today) + (ia && ia.uyarilar && ia.uyarilar.length ? '<div class="warnbox" style="margin:0 0 14px"><b>Excel\'den aktarımda düzeltme gereken alan:</b> ' + ia.uyarilar.map(u => esc(u.alan) + ' — Excel\'deki değer "' + esc(u.ham) + '" geçerli bir tarih değil, boş bırakıldı').join('; ') + '</div>' : '') + '<div class="meta-grid"><div><span>Oluşturulma</span>' + esc(m.fmtDateTime(a.olusturmaTarihi)) + '</div><div><span>Son güncelleme</span>' + esc(m.fmtDateTime(a.sonGuncelleme)) + '</div><div><span>Termin</span>' + (esc(m.fmtDate(a.terminTarihi)) || '—') + ' ' + terminB(a, today) + '</div></div>' + formHTML(a, 'edit');
       const f = $('#editForm');
       const mark = () => { d.dirty = true; $('#dirtyNote').textContent = 'Kaydedilmemiş değişiklik var'; };
       f.addEventListener('input', mark); f.addEventListener('change', mark);
@@ -2095,11 +2369,11 @@ window.TAP = window.TAP || {};
       const hs = await repo.history(a.aksiyonId);
       await repo.resolveNames(hs.map(h => h.kullaniciId));
       if (!ui.drawer || ui.drawer.tab !== 'gecmis') return;
-      const lbl = { olusturma: 'Oluşturuldu', guncelleme: 'Güncellendi', tamamlama: 'Tamamlandı', yeniden_acma: 'Yeniden açıldı', excel_hazirlama: 'Excel aktarım partisine eklendi', excel_dogrulama: 'Hedef Excel\'de doğrulandı', excel_ice_aktarma: 'Excel\'den içe aktarıldı' };
+      const lbl = { olusturma: 'Oluşturuldu', guncelleme: 'Güncellendi', tamamlama: 'Tamamlandı', yeniden_acma: 'Tekrar açıldı', silme: 'Silindi', geri_alma: 'Silme geri alındı', excel_hazirlama: 'Excel aktarım partisine eklendi', excel_dogrulama: 'Hedef Excel\'de doğrulandı', excel_ice_aktarma: 'Excel\'den içe aktarıldı' };
       const fl = (k) => (m.EXCEL_FIELDS.concat(m.EXTRA_FIELDS).find(f => f.key === k) || {}).label || k;
       const fv = (k, v) => (k.endsWith('Tarihi') ? m.fmtDate(v) : v) || '(boş)';
       if (a.iceAktarma) hs.push({ tip: 'excel_ice_aktarma', surum: 1, zaman: a.iceAktarma.zaman, kullaniciEtiket: 'Excel\'den içe aktarma', batch: a.iceAktarma.dosya + ' · satır ' + a.iceAktarma.satir, degisiklikler: [] });
-      body.innerHTML = hs.length ? '<ul class="timeline">' + hs.map(h => '<li><div class="h"><b>' + esc(lbl[h.tip] || h.tip) + '</b> · sürüm ' + h.surum + ' · ' + esc(m.fmtDateTime(h.zaman)) + ' · ' + esc(h.kullaniciId ? (repo.names[h.kullaniciId] || h.kullaniciAd || 'Kullanıcı') : h.kullaniciEtiket) + (h.batch ? ' · ' + esc(h.batch) : '') + '</div>' +
+      body.innerHTML = hs.length ? '<ul class="timeline">' + hs.map(h => '<li><div class="h"><b>' + esc(lbl[h.tip] || h.tip) + '</b> · sürüm ' + h.surum + ' · ' + esc(m.fmtDateTime(h.zaman)) + ' · ' + esc(h.kullaniciId ? (repo.names[h.kullaniciId] || h.kullaniciAd || 'Kullanıcı') : h.kullaniciEtiket) + (h.batch ? ' · ' + esc(h.batch) : '') + (h.neden ? ' · Neden: ' + esc(h.neden) : '') + '</div>' +
         (h.degisiklikler && h.degisiklikler.length ? '<div class="chg">' + h.degisiklikler.map(c => '<div><b>' + esc(fl(c.alan)) + ':</b> <del>' + esc(fv(c.alan, c.eski)) + '</del> → <ins>' + esc(fv(c.alan, c.yeni)) + '</ins></div>').join('') + '</div>' : '') + '</li>').join('') + '</ul>' : '<div class="empty">Geçmiş kaydı yok.</div>';
     } else {
       const x = a.excel || {}, s = m.excelState(a);
@@ -2108,6 +2382,13 @@ window.TAP = window.TAP || {};
         (diffs ? '<h3 style="font-size:14px;margin:18px 0 6px">Son doğrulanmış aktarımdan sonraki değişiklikler</h3>' + diffTable(diffs) : '<p class="help" style="margin-top:16px">Bu kayıt henüz Excel\'e aktarılıp doğrulanmadı.</p>');
     }
     applyWritable();
+  }
+  // Kaydın okunabilir özeti; tamamlanan kayıtta yapılan iş ve kapanış süresi öne çıkar
+  function summaryHTML(a, today) {
+    const done = m.isDone(a), cd = m.closeDays(a);
+    return '<div class="dsummary' + (done ? ' done' : '') + '"><h4>Konu</h4><p>' + esc(a.konu || '—') + '</p><h4>Alınacak aksiyon</h4><p>' + esc(a.alinacakAksiyon || '—') + '</p>' + (a.kapanisAciklamasi ? '<h4>Kapanış açıklaması (yapılan iş)</h4><p>' + esc(a.kapanisAciklamasi) + '</p>' : '') +
+      '<div class="row"><span><b>Firma / Hat:</b> ' + esc([a.firma, a.hat].filter(Boolean).join(' · ') || '—') + '</span><span><b>Sorumlu:</b> ' + esc(sorumluTxt(a)) + '</span><span><b>Açılış:</b> ' + esc(m.fmtDate(a.talepTarihi) || '—') + '</span>' +
+      (done ? '<span><b>Tamamlanma:</b> ' + esc(m.fmtDate(a.tamamlanmaTarihi) || 'girilmemiş') + '</span><span><b>Kapanış süresi:</b> ' + (cd == null ? '—' : cd + ' gün') + '</span>' : '<span><b>Termin:</b> ' + esc(m.fmtDate(a.terminTarihi) || 'yok') + '</span>') + '</div></div>';
   }
   function diffTable(diffs) {
     if (!diffs.length) return '<p class="help">Fark yok.</p>';
@@ -2132,9 +2413,21 @@ window.TAP = window.TAP || {};
       else { toast('Kaydedilemedi: ' + (err.message || err.code), 'bad'); $$('#drawer [data-write]').forEach(b => b.disabled = !ui.writable); }
     }
   }
+  // Tamamlama onayı + isteğe bağlı kısa kapanış açıklaması. Vazgeçilirse null.
+  function askClose(a) {
+    return new Promise(res => {
+      const prev = $('#cmodal'); if (prev) prev.remove();
+      const w = document.createElement('div'); w.id = 'cmodal';
+      w.innerHTML = '<div class="scrim on" style="z-index:110"></div><div class="modal on" role="alertdialog" aria-modal="true" style="z-index:111;width:min(480px,calc(100% - 32px))"><div class="modal-h"><h2 style="font-size:16px">' + esc(a.aksiyonId) + ' tamamlansın mı?</h2></div><div class="modal-b" style="padding:0 20px"><p class="help" style="margin-top:0">' + esc((a.konu || '').slice(0, 120)) + '</p><p class="help">Tamamlanma tarihi bugün (' + esc(m.fmtDate(m.todayStr())) + ') olarak kaydedilir.</p><label class="f"><span class="help">Kapanış açıklaması (isteğe bağlı) — yapılan iş</span><textarea id="closeNote" rows="3" maxlength="500" placeholder="Örn. hortum ve rakor değiştirildi, kaçak giderildi">' + esc(a.kapanisAciklamasi || '') + '</textarea></label></div><div class="modal-f"><button class="btn" data-c="0">Vazgeç</button><button class="btn ok" data-c="1">' + ic('done') + 'Aksiyonu tamamla</button></div></div>';
+      document.body.appendChild(w);
+      w.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (b || e.target.classList.contains('scrim')) { e.stopPropagation(); const v = $('#closeNote', w).value.trim(); w.remove(); res(b && b.dataset.c === '1' ? v : null); } });
+      setTimeout(() => { const i = w.querySelector('#closeNote'); i && window.innerWidth > 900 && i.focus(); }, 30);
+    });
+  }
   async function quickComplete(id) {
     const a = repo.actions.get(id); if (!a) return;
-    try { const n = await repo.completeAction(id, a.surum); toast(n.aksiyonId + ' tamamlandı (' + m.fmtDate(n.tamamlanmaTarihi) + ').', 'ok'); }
+    const note = await askClose(a); if (note === null) return false;
+    try { const n = await repo.completeAction(id, a.surum, note); toast(n.aksiyonId + ' tamamlandı (' + m.fmtDate(n.tamamlanmaTarihi) + ').', 'ok'); }
     catch (err) { toast(err.conflict ? err.message : 'İşlem başarısız: ' + (err.message || err.code), 'bad'); }
   }
 
@@ -2193,7 +2486,7 @@ window.TAP = window.TAP || {};
   document.addEventListener('change', e => { const t = e.target; if (t.matches('[data-r]')) { ui.rapor[t.dataset.r] = t.value; renderRapor($('#content')); } });
 
   function exportRows(actions, filename, extraSheets) {
-    const rows = actions.map(a => Object.assign(m.toExcelRow(a, x => repo.acanName(x)), { 'Durum (panel)': a.durum, 'Öncelik': a.oncelik, 'Sürüm': a.surum, 'Excel durumu': m.EXCEL_STATE_LABEL[m.excelState(a)] }));
+    const rows = actions.map(a => Object.assign(m.toExcelRow(a, x => repo.acanName(x)), { 'Durum (panel)': a.durum, 'Öncelik': a.oncelik, 'Kapanış açıklaması': a.kapanisAciklamasi || '', 'Sürüm': a.surum, 'Oluşturulma': m.fmtDateTime(a.olusturmaTarihi), 'Son güncelleme': m.fmtDateTime(a.sonGuncelleme), 'Excel durumu': m.EXCEL_STATE_LABEL[m.excelState(a)] }, a.silindi ? { 'Silindi': 'Evet', 'Silinme': m.fmtDateTime(a.silinmeZamani), 'Silme nedeni': a.silmeNedeni || '' } : {}));
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(rows), 'Aksiyonlar');
     (extraSheets || []).forEach(([n, data]) => XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(data), n));
@@ -2215,6 +2508,8 @@ window.TAP = window.TAP || {};
     for (const id of [...X.sel]) if (!cand.find(a => a.aksiyonId === id)) X.sel.delete(id);
     el.innerHTML = '<div class="steps"><div class="step"><span class="n">1</span><b>Kayıtları seçin</b>Aktarılmamış veya son aktarımdan sonra değişen kayıtlar</div><div class="step"><span class="n">2</span><b>Farkları onaylayın</b>Alan alan önizleme ve onay</div><div class="step"><span class="n">3</span><b>Dosyayı hedefe işleyin</b>Excel sütun düzeninde .xlsx — indirmek aktarım sayılmaz</div><div class="step"><span class="n">4</span><b>Hedef Excel\'de doğrulayın</b>Yalnızca birebir eşleşen kayıtlar "Aktarıldı" olur</div></div>' +
       '<div class="kpis" style="grid-template-columns:repeat(4,minmax(0,1fr))">' + kpi('Hiç aktarılmamış', nNew, nNew ? 'warn' : '', 'Excel\'de olmayan kayıt', null) + kpi('Aktarımdan sonra değişen', nCh, nCh ? 'warn' : '', 'Yeniden aktarılmalı', null) + kpi('Doğrulama bekleyen', pending.length, pending.length ? 'info' : '', 'Partide, hedefte doğrulanmadı', null) + kpi('Aktarıldı (doğrulandı)', synced.length, 'ok', 'Hedef Excel ile eşleşti', null) + '</div>' +
+      '<div class="card" style="margin-bottom:16px"><div class="card-h"><h2>Hızlı Excel dışa aktarımı</h2><span class="sub">Excel\'in 15 sütunu aynı sırayla + panel bilgileri. Bu indirmeler aktarım sayılmaz; kayıtların senkronizasyon durumu değişmez.</span></div><div class="card-b qexp">' +
+      '<button class="btn" data-qexp="all">' + ic('dl') + 'Tüm kayıtlar (' + all.length + ')</button><button class="btn" data-qexp="open">' + ic('dl') + 'Açık aksiyonlar (' + all.filter(a => !m.isDone(a)).length + ')</button><button class="btn" data-qexp="done">' + ic('dl') + 'Tamamlanan aksiyonlar (' + all.filter(m.isDone).length + ')</button><button class="btn" data-qexp="pending">' + ic('dl') + 'Yalnızca yeni / değişen (' + all.filter(a => ['new', 'changed'].includes(m.excelState(a))).length + ')</button><a class="btn ghost" href="#rapor" data-route="rapor">Tarih aralığına göre rapor →</a></div></div>' +
       '<div class="tabs">' + [['bekleyen', 'Aktarılacaklar (' + cand.length + ')'], ['partiler', 'Aktarım partileri (' + repo.batches.length + ')'], ['yontem', 'Bağlantı yöntemleri']].map(([k, l]) => '<button data-xtab="' + k + '" class="' + (X.tab === k ? 'on' : '') + '">' + l + '</button>').join('') + '</div><div id="xbody"></div>';
     const b = $('#xbody');
     if (X.tab === 'bekleyen') {
@@ -2327,9 +2622,16 @@ window.TAP = window.TAP || {};
           (sim.length ? '<div class="warnbox"><b>Olası farklı yazımlar</b> (otomatik birleştirilmedi; gerekirse fazlalığı kaldırın): ' + sim.map(g => g.map(x => '"' + esc(x) + '"').join(' / ')).join(' · ') + '</div>' : '') + '</div>';
       }).join('') + '</div></div>' +
       (!isTestMode() ? '' : '<div class="card"><div class="card-h"><h2>Test verisi</h2></div><div class="card-b"><p style="margin-top:0;font-size:14px">Sentetik kayıtlar <b>[TEST]</b> ön ekli konular ve <b>TEST Personel</b> adlarıyla oluşturulur; gerçek şirket aksiyonu içermez.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" data-seed="20" data-write>20 sentetik kayıt yükle</button>' + (d.mode !== 'cloud' ? '<button class="btn ghost" data-wipe style="color:var(--bad)">Yerel test verisini sil</button>' : '') + '</div><div id="seedProg" class="help" style="margin-top:8px"></div></div></div>') +
+      deletedCardHTML() +
       '<div class="card"><div class="card-h"><h2>Görünüm</h2></div><div class="card-b"><div class="seg" style="max-width:360px" data-theme-seg>' + [['light', 'Açık'], ['system', 'Sistem'], ['dark', 'Koyu']].map(([k, l]) => '<button type="button" data-th="' + k + '" class="' + ((prefs('tema') || 'light') === k ? 'on' : '') + '">' + l + '</button>').join('') + '</div></div></div>' +
       '</div>';
     applyWritable();
+  }
+  function deletedCardHTML() {
+    const del = repo.deletedActions().sort((a, b) => String(b.silinmeZamani || '').localeCompare(String(a.silinmeZamani || '')));
+    return '<div class="card"><div class="card-h"><h2>Silinen aksiyonlar</h2><span class="sub">' + del.length + ' kayıt · ' + (ui.admin ? 'geri alabilirsiniz' : 'geri alma yalnızca panel yöneticilerinde') + '</span></div><div class="card-b">' +
+      (del.length ? '<div class="tbl-wrap" style="box-shadow:none"><table class="t"><thead><tr><th>Aksiyon</th><th>Konu</th><th>Silinme</th><th>Neden</th><th></th></tr></thead><tbody>' + del.map(a => '<tr data-open="' + esc(a.aksiyonId) + '"><td class="id">' + esc(a.aksiyonId) + '</td><td class="konu">' + esc(a.konu) + '</td><td class="nw muted">' + esc(m.fmtDateTime(a.silinmeZamani)) + '</td><td>' + esc(a.silmeNedeni || '—') + ((a.excel || {}).sonBasariliSurum != null ? '<div class="b upcoming" title="Excel satırı otomatik silinmez">Excel\'de satırı var — yönetici kaldırmalı</div>' : '') + '</td><td><button class="btn sm" data-restore="' + esc(a.aksiyonId) + '" data-write data-admin>Geri al</button></td></tr>').join('') + '</tbody></table></div>' : '<p class="help" style="margin:0">Silinen kayıt yok.</p>') + '</div></div>' +
+      '<div class="card"><div class="card-h"><h2>Yedek</h2></div><div class="card-b"><p class="help" style="margin-top:0">Silinenler dahil bütün kayıtları Excel sütun düzeninde indirir. Bu dosya "Excel\'den içe aktar" ile yeniden yüklenebilir; panelde bulunmayan Aksiyon ID\'ler geri gelir, mevcutlar atlanır. Sunucu tarafında SharePoint liste sürüm geçmişi ve geri dönüşüm kutusu ayrıca korur.</p><button class="btn" data-backup>' + ic('dl') + 'Tam yedek indir (.xlsx)</button></div></div>';
   }
   // ---------- Microsoft 365: kurulum ve içe aktarma ----------
   function m365SetupHTML() {
@@ -2436,25 +2738,44 @@ window.TAP = window.TAP || {};
     let el;
     if ((el = t.closest('a[data-route]'))) { e.preventDefault(); go(el.dataset.route); return; }
     if ((el = t.closest('[data-bn="menu"]'))) { e.preventDefault(); openMenu(); return; }
-    if ((el = t.closest('[data-complete]'))) { e.stopPropagation(); el.disabled = true; await quickComplete(el.dataset.complete); return; }
+    if ((el = t.closest('[data-complete]'))) { e.stopPropagation(); el.disabled = true; const r = await quickComplete(el.dataset.complete); if (r === false) el.disabled = false; return; }
     if ((el = t.closest('[data-open]')) && !t.closest('input,button,label')) { openDrawer(el.dataset.open); return; }
     if ((el = t.closest('[data-close]'))) { closeDrawer(); return; }
     if (t.id === 'scrim') { closeDrawer(); return; }
     if ((el = t.closest('[data-dtab]'))) { if (ui.drawer.dirty && el.dataset.dtab !== 'detay' && !(await confirmDiscard())) return; ui.drawer.dirty = false; ui.drawer.tab = el.dataset.dtab; renderDrawer(); return; }
     if (t.closest('[data-dsave]')) { if (ui.drawer.tab !== 'detay') { ui.drawer.tab = 'detay'; renderDrawer(); return; } saveDrawer(); return; }
     if (t.closest('[data-dcomplete]')) {
-      if (ui.drawer.tab === 'detay') saveDrawer({ durum: 'Tamamlandı' });
+      if (ui.drawer.tab === 'detay') { const note = await askClose(repo.actions.get(ui.drawer.id)); if (note !== null) saveDrawer(Object.assign({ durum: 'Tamamlandı' }, note ? { kapanisAciklamasi: note } : {})); }
       else { const a = repo.actions.get(ui.drawer.id); await quickComplete(a.aksiyonId); if (ui.drawer) { ui.drawer.base = repo.actions.get(a.aksiyonId).surum; renderDrawer(); } }
       return;
     }
     if (t.closest('[data-reopen]')) { saveDrawer({ durum: 'Açık', tamamlanmaTarihi: '' }); return; }
+    if (t.closest('[data-del]')) {
+      const d = ui.drawer, a = d && repo.actions.get(d.id); if (!a) return;
+      const neden = await askReason('"' + a.aksiyonId + ' — ' + (a.konu || '').slice(0, 60) + '" silinsin mi?', 'Kayıt listelerden ve raporlardan kaldırılır; değişiklik geçmişiyle birlikte saklanır ve panel yöneticisi geri alabilir. Excel\'e aktarılmış satır Excel\'den ayrıca silinmelidir.');
+      if (neden === null) return;
+      try { await repo.deleteAction(a.aksiyonId, d.dirty ? null : d.base, neden); toast(a.aksiyonId + ' silindi.', 'ok'); closeDrawer(true); }
+      catch (err) { toast(err.conflict ? err.message : 'Silinemedi: ' + (err.message || err.code), 'bad'); }
+      return;
+    }
+    if ((el = t.closest('[data-restore]'))) {
+      try { const n = await repo.restoreAction(el.dataset.restore); toast(n.aksiyonId + ' geri alındı.', 'ok'); if (ui.drawer) { ui.drawer.base = n.surum; renderDrawer(); } rerenderIf('ayarlar', renderAyarlar); }
+      catch (err) { toast('Geri alınamadı: ' + (err.message || err.code), 'bad'); }
+      return;
+    }
     if ((el = t.closest('[data-sortk]'))) { const v = $('.toolbar').dataset.view, st = ui.lists[v]; const k = el.dataset.sortk; st.sort = { k, d: st.sort.k === k && st.sort.d === 'asc' ? 'desc' : 'asc' }; renderListResults(v); return; }
     if (t.closest('[data-ftoggle]')) { t.closest('.toolbar').classList.toggle('show-f'); return; }
-    if (t.closest('[data-more]')) { const v = $('.toolbar').dataset.view; ui.lists[v].limit += 200; renderListResults(v); return; }
-    if (t.closest('[data-clearf]')) { const v = $('.toolbar').dataset.view; ui.lists[v].f = {}; ui.lists[v].q = ''; renderList($('#content'), v); return; }
+    if ((el = t.closest('[data-page]'))) { const v = $('.toolbar').dataset.view; ui.lists[v].page = Number(el.dataset.page) || 1; renderListResults(v); $('.toolbar').scrollIntoView({ block: 'start' }); return; }
+    if (t.closest('[data-clearf]')) { const v = $('.toolbar').dataset.view; ui.lists[v].f = {}; ui.lists[v].q = ''; ui.lists[v].page = 1; renderList($('#content'), v); return; }
     if (t.closest('[data-exportlist]')) { const v = $('.toolbar').dataset.view; exportRows(filterActions(v), 'Teknik_Aksiyonlar_' + v + '_' + m.todayStr() + '.xlsx'); return; }
-    if ((el = t.closest('[data-kpi]'))) { const r = el.dataset.kpi; ui.lists[r].f = JSON.parse(el.dataset.f || '{}'); ui.lists[r].q = ''; go(r); return; }
-    if ((el = t.closest('[data-gofilter]'))) { ui.lists.liste.f = { [el.dataset.gofilter]: el.dataset.val }; ui.lists.liste.q = ''; go('liste'); return; }
+    if ((el = t.closest('[data-kpi]'))) { const r = el.dataset.kpi; ui.lists[r].f = JSON.parse(el.dataset.f || '{}'); ui.lists[r].q = ''; ui.lists[r].page = 1; go(r); return; }
+    if ((el = t.closest('[data-gofilter]'))) { ui.lists.liste.f = { [el.dataset.gofilter]: el.dataset.val }; ui.lists.liste.q = ''; ui.lists.liste.page = 1; go('liste'); return; }
+    if (t.closest('[data-backup]')) { exportRows([...repo.actions.values()].sort((a, b) => String(a.aksiyonId).localeCompare(String(b.aksiyonId))), 'Teknik_Aksiyon_YEDEK_' + m.todayStr() + '.xlsx'); return; }
+    if ((el = t.closest('[data-qexp]'))) {
+      const k = el.dataset.qexp, all = repo.allActions(), sel = k === 'open' ? all.filter(a => !m.isDone(a)) : k === 'done' ? all.filter(m.isDone) : k === 'pending' ? all.filter(a => ['new', 'changed'].includes(m.excelState(a))) : all;
+      if (!sel.length) { toast('Bu seçimde kayıt yok.'); return; }
+      exportRows(sel.sort((a, b) => String(a.aksiyonId).localeCompare(String(b.aksiyonId))), 'Teknik_Aksiyonlar_' + ({ all: 'Tumu', open: 'Acik', done: 'Tamamlanan', pending: 'Yeni_ve_Degisen' }[k]) + '_' + m.todayStr() + '.xlsx'); return;
+    }
     if (t.closest('[data-rexport]')) { const { arr, rows } = reportData(); exportRows(arr, 'Teknik_Aksiyon_Raporu_' + m.todayStr() + '.xlsx', [['Özet', [['Grup', 'Toplam', 'Açık', 'Tamamlanan', 'Geciken', 'Termin yok', 'Tamamlanma %', 'Ort. süre (gün)']].concat(rows.map(o => [o.k, o.t, o.o, o.d, o.x, o.nt, o.rate, o.avg == null ? '' : Number(o.avg.toFixed(1))]))]]); return; }
     // excel
     if ((el = t.closest('[data-xtab]'))) { ui.excel.tab = el.dataset.xtab; renderExcel($('#content')); return; }
