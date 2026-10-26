@@ -8,7 +8,7 @@ if (typeof window === 'undefined') {
   window.TAP_CONFIG = {
     mode: 'm365',
     tenantId: 'b9038edd-e64d-4dd8-9aba-da87e2cb523e',
-    clientId: 'e65d3275-8e59-4e94-aa43-701624441bfd',
+    clientId: '5aec8637-267f-459b-ac14-af2519a9d273',
     siteUrl: 'https://alterna7.sharepoint.com/sites/ZuberShareFolder', // verilerin tutulacağı SharePoint sitesi
     redirectUri: 'https://zuberteknik.github.io/teknik-aksiyon/'
   };
